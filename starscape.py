@@ -74,8 +74,10 @@ def make_group_inputs(group, x, y, *sockets):
         raise Exception("Invalid number of arguments!")
     node = group.nodes.new("NodeGroupInput")
     node.location = (x, y)
+
     for i in range(len(sockets) // 2):
-        group.inputs.new("NodeSocket" + sockets[2 * i], sockets[2 * i + 1])
+        group.interface.new_socket(sockets[2 * i + 1], in_out='INPUT', socket_type="NodeSocket" + sockets[2 * i])
+
     return node
 
 def make_group_outputs(group, x, y, *sockets):
@@ -83,8 +85,10 @@ def make_group_outputs(group, x, y, *sockets):
         raise Exception("Invalid number of arguments!")
     node = group.nodes.new("NodeGroupOutput")
     node.location = (x, y)
+    
     for i in range(len(sockets) // 2):
-        group.outputs.new("NodeSocket" + sockets[2 * i], sockets[2 * i + 1])
+        group.interface.new_socket(sockets[2 * i + 1], in_out='OUTPUT', socket_type="NodeSocket" + sockets[2 * i])
+
     return node
 
 ### Main function ##########################################################################
